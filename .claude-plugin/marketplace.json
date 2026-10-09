@@ -1,0 +1,19 @@
+{
+  "name": "code-standards",
+  "owner": {
+    "name": "Antoni Saputra"
+  },
+  "metadata": {
+    "description": "Personal coding standards for AI coding agents",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "code-standards",
+      "description": "Makes AI coding agents write clean, readable code: no comment noise, throw-and-catch-at-boundary errors, one job per function, canonical Tailwind classes, tests, and Conventional Commits",
+      "source": "./",
+      "strict": false,
+      "skills": ["./skills/code-standards"]
+    }
+  ]
+}
