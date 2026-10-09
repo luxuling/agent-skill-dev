@@ -1,6 +1,7 @@
 ---
 name: code-standards
 description: The owner's personal coding standards covering comments, error handling, abstraction, types, naming, folder layout, blank lines, testing, and git conventions. Use this skill whenever you write, edit, refactor, or review code in any language, scaffold a project or create a new file, add or change tests, name a branch, or write a commit message. Apply it even for small edits and even when the user never mentions style or standards. For TypeScript, JavaScript, React, Next.js, or Node work it also carries the stack-specific rules. Whenever you write or edit Tailwind CSS classes (className, class, cn, clsx, cva, @apply), it requires checking every class is canonical and fixing any that are not.
+license: MIT
 ---
 
 # Code standards

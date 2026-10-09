@@ -4,6 +4,7 @@
 ![Claude Code](https://img.shields.io/badge/Claude_Code-ready-d97757)
 ![Codex](https://img.shields.io/badge/Codex-ready-10a37f)
 ![Gemini CLI](https://img.shields.io/badge/Gemini_CLI-ready-4285f4)
+![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
 An [Agent Skill](https://agentskills.io/specification) that makes AI coding agents write code the owner's way: clean, readable, and consistent, with no manual cleanup afterwards.
 
@@ -87,3 +88,7 @@ The agent reads a file under `references/` only when the task uses that stack, s
 ## Test a change
 
 Use the `skill-creator` skill. It runs each prompt in `evals/evals.json` with and without the skill and opens a viewer to compare the results. Output goes to `skills/code-standards-workspace/`, which is git-ignored.
+
+## License
+
+[MIT](LICENSE)
