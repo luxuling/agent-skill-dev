@@ -39,7 +39,7 @@ Uses the [skills](https://skills.sh) CLI and works with Claude Code, Codex, Gemi
 
 ```text
 /plugin marketplace add luxuling/agent-skill-dev
-/plugin install code-standards@code-standards
+/plugin install lixu@code-standards
 ```
 
 ### Manual
@@ -61,7 +61,7 @@ Nothing to call. The agent loads the skill on its own whenever it writes, edits,
 > write the commit message for this change
 ```
 
-To check it is active in Claude Code, ask `what skills do you have?` and look for `code-standards`.
+To check it is active in Claude Code, ask `what skills do you have?` and look for `lixu:code-standards` (plugin install) or `code-standards` (other installs).
 
 ## Structure
 

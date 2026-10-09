@@ -9,11 +9,13 @@
   },
   "plugins": [
     {
-      "name": "code-standards",
+      "name": "lixu",
       "description": "Makes AI coding agents write clean, readable code: no comment noise, throw-and-catch-at-boundary errors, one job per function, canonical Tailwind classes, tests, and Conventional Commits",
       "source": "./",
       "strict": false,
-      "skills": ["./skills/code-standards"]
+      "skills": [
+        "./skills/code-standards"
+      ]
     }
   ]
 }
