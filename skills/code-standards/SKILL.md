@@ -1,6 +1,6 @@
 ---
 name: code-standards
-description: The owner's personal coding standards covering comments, error handling, abstraction, types, naming, folder layout, blank lines, testing, and git conventions. Use this skill whenever you write, edit, refactor, or review code in any language, scaffold a project or create a new file, add or change tests, name a branch, or write a commit message. Apply it even for small edits and even when the user never mentions style or standards. For TypeScript, JavaScript, React, Next.js, or Node work it also carries the stack-specific rules. Whenever you write or edit Tailwind CSS classes (className, class, cn, clsx, cva, @apply), it requires checking every class is canonical and fixing any that are not.
+description: The owner's personal coding standards covering comments, error handling, abstraction, types, naming, folder layout, blank lines, testing, and git conventions. Use this skill whenever you write, edit, refactor, or review code in any language, scaffold a project or create a new file, add or change tests, name a branch, or write a commit message. Apply it even for small edits and even when the user never mentions style or standards. For TypeScript, JavaScript, React, Next.js, Node, or Go work it also carries the stack-specific rules. Whenever you write or edit Tailwind CSS classes (className, class, cn, clsx, cva, @apply), it requires checking every class is canonical and fixing any that are not.
 license: MIT
 ---
 
@@ -11,6 +11,8 @@ These are the standards of the person you are writing code for. They exist becau
 Explicit project instructions and tool config (lint rules, formatter config, an AGENTS.md or CLAUDE.md in the repo) win over this skill. Everything else follows what is written here.
 
 For TypeScript, JavaScript, React, Next.js, or Node work, read [references/typescript.md](references/typescript.md) before writing code. It holds the rules for functions, exports, types, validation, and default libraries.
+
+For Go work, read [references/go.md](references/go.md) before writing code. It holds the rules for errors, interfaces, validation, and default libraries, and it replaces the general rules on file names, test location, and comments for Go.
 
 Whenever you write or edit Tailwind CSS classes, read [references/tailwind.md](references/tailwind.md) first. Every class must be canonical, and you check and fix that with Tailwind's own tool after each change.
 

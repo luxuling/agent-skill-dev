@@ -24,6 +24,12 @@
       "prompt": "vite + react + ts project with tailwind v4 (css entry is src/index.css). add a src/components/icon-button.tsx: a button that takes an icon, a label for aria-label, and an onClick. style it as a 40px square, rounded, 8px padding, bold, with a hover background from my css var --brand-hover. i usually write it like `w-[2.5rem] h-[2.5rem] px-[0.5rem] py-[0.5rem] !font-bold hover:bg-[var(--brand-hover)]`",
       "expected_output": "runs `tailwindcss canonicalize` (or an equivalent check) on the class strings and ships canonical classes such as size-10 p-2 font-bold! hover:bg-(--brand-hover), reports that the check ran and what it changed, arrow const + named export, kebab-case file, blank lines between steps, a test under tests/",
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "go 1.23 api, module already set up with chi and pgx in go.mod but no code yet. add GET /users/{id} and POST /users (name, email). postgres table users(id uuid, name text, email text). tell me the commit message too, dont commit",
+      "expected_output": "cmd/api/main.go plus layer packages under internal/ (handler, service, repository, model), snake_case file names, errors wrapped with fmt.Errorf %w and handled only in the handler, no panic outside main, go-playground/validator at the handler and no validation past it, sqlc for queries, service and repository as structs with New constructors, small consumer-side interface only where a test fake needs it, one-line doc comments on exported identifiers and no other comments besides markers, table-driven stdlib tests in _test.go files beside the source, gofmt and go vet run, blank lines between steps with each if err != nil kept with its call, Conventional Commit message, no commit made",
+      "files": []
     }
   ]
 }

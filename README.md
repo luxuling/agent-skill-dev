@@ -23,6 +23,7 @@ One folder works in Claude Code, Codex, Gemini CLI, Cursor, and any other agent 
 | Testing | Every feature and fix ships with tests in `tests/` |
 | Git | Conventional Commits, `type/short-desc` branches, no commit unless asked |
 | TypeScript | Arrow functions, named exports, no `any` / `as` / `!`, Zod at the edges |
+| Go | Wrapped errors handled at the boundary, consumer-side interfaces, table-driven tests beside the code, chi + validator + pgx/sqlc |
 | Tailwind | Canonical classes only, checked and fixed with `tailwindcss canonicalize` |
 
 ## Install
@@ -72,6 +73,7 @@ skills/code-standards/
 ├── SKILL.md                      # rules for every language
 ├── references/
 │   ├── typescript.md             # TypeScript, React, Next.js, Node
+│   ├── go.md                     # Go
 │   └── tailwind.md               # Tailwind canonical classes
 └── evals/
     └── evals.json                # test prompts
