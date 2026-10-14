@@ -73,6 +73,7 @@ export const createInvoice = async (input: CreateInvoiceInput) => {
 
 - Name every file and folder in kebab-case: `user-profile.tsx`, `format-date.ts`, `use-auth.ts`.
 - Organize by layer, meaning by the kind of file, not by feature: `components/`, `hooks/`, `services/`, `utils/`, `types/`. Create a new layer folder only when a file has nowhere to go.
+- Write every convention value in English: identifiers, enum members and values, statuses, constants, keys, query params, tab and route slugs. Write `case 'unpaid':`, never `case 'belum-bayar':`. Only a description, free text written for a person to read, may be in another language.
 
 ## Testing
 
