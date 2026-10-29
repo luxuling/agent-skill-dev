@@ -14,7 +14,8 @@
       "source": "./",
       "strict": false,
       "skills": [
-        "./skills/code-standards"
+        "./skills/code-standards",
+        "./skills/micro-interactions"
       ]
     }
   ]

@@ -1,0 +1,23 @@
+{
+  "skill_name": "micro-interactions",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "vite + react + ts app, tailwind already set up. add a login form with email and password that POSTs to /api/login. when the API says the credentials are wrong, show that on the form.",
+      "expected_output": "Password field has an eye show/hide control that toggles type between password and text, is type=button, and changes its accessible name and aria-pressed with the state. Submit shows a pending state and ignores a second click until the request settles. A wrong-credentials error is visible on the field. Login does not open a confirm dialog.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "the users table already lists users. add a delete button on each row that calls DELETE /api/users/:id.",
+      "expected_output": "Delete opens a confirm dialog that names the user and says the delete cannot be undone. The confirming button says Delete, not OK. Cancel, Escape, and backdrop click close without deleting, and focus starts on the safe action. The confirm button shows a pending state until the request settles and accepts clicks again on failure. Success or failure is visible. Focus returns to the row's delete button.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "add a settings form with display name and timezone. saving calls PATCH /api/settings. the person can also leave the page from the nav.",
+      "expected_output": "Save does not open a confirm dialog. The save button shows a pending state and ignores a second click until the request settles. Success is a toast or inline message. An error about one field is shown on that field. Leaving the page with unsaved changes asks first, and declining keeps the person on the form.",
+      "files": []
+    }
+  ]
+}
