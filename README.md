@@ -25,6 +25,7 @@ One folder works in Claude Code, Codex, Gemini CLI, Cursor, and any other agent 
 | TypeScript | Arrow functions, named exports, no `any` / `as` / `!`, Zod at the edges |
 | Go | Wrapped errors handled at the boundary, consumer-side interfaces, table-driven tests beside the code, chi + validator + pgx/sqlc |
 | Tailwind | Canonical classes only, checked and fixed with `tailwindcss canonicalize` |
+| Micro-interactions | Password reveal, confirm on hard-to-undo actions, pending buttons, visible outcomes, loading/empty/error. Rules live in `skills/micro-interactions/` |
 
 ## Install
 
@@ -48,6 +49,7 @@ Uses the [skills](https://skills.sh) CLI and works with Claude Code, Codex, Gemi
 ```sh
 git clone https://github.com/luxuling/agent-skill-dev.git
 ln -s "$PWD/agent-skill-dev/skills/code-standards" ~/.claude/skills/code-standards
+ln -s "$PWD/agent-skill-dev/skills/micro-interactions" ~/.claude/skills/micro-interactions
 ```
 
 Use `~/.agents/skills/` instead of `~/.claude/skills/` for Codex, Gemini CLI, and other agents.
@@ -60,9 +62,13 @@ Nothing to call. The agent loads the skill on its own whenever it writes, edits,
 > add a users page that fetches /api/users and shows a table
 > fix the invoice total rounding bug
 > write the commit message for this change
+> add a login form with email and password
+> add delete on each row of the users table
 ```
 
-To check it is active in Claude Code, ask `what skills do you have?` and look for `lixu:code-standards` (plugin install) or `code-standards` (other installs).
+UI work also loads `micro-interactions`, which ships the password eye, confirm dialogs, pending buttons, and the other feedback in that skill.
+
+To check it is active in Claude Code, ask `what skills do you have?` and look for `lixu:code-standards` and `lixu:micro-interactions` (plugin install) or `code-standards` and `micro-interactions` (other installs).
 
 ## Structure
 
@@ -75,6 +81,10 @@ skills/code-standards/
 │   ├── typescript.md             # TypeScript, React, Next.js, Node
 │   ├── go.md                     # Go
 │   └── tailwind.md               # Tailwind canonical classes
+└── evals/
+    └── evals.json                # test prompts
+skills/micro-interactions/
+├── SKILL.md                      # password reveal, confirms, feedback
 └── evals/
     └── evals.json                # test prompts
 ```

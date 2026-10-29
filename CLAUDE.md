@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-Source for `code-standards`, a personal Agent Skill that makes AI coding agents write code the owner's way. There is no application code and no build step. The deliverable is the `skills/code-standards/` folder, published from GitHub as `luxuling/agent-skill-dev`.
+Source for `code-standards`, a personal Agent Skill that makes AI coding agents write code the owner's way. There is no application code and no build step. The deliverables are the folders under `skills/`, published from GitHub as `luxuling/agent-skill-dev`.
 
 The rules in the skill come from the owner, who was interviewed for them. Do not add, drop, or soften a rule on your own judgment. If a case is not covered, ask the owner and write down their answer.
 
@@ -13,7 +13,8 @@ The rules in the skill come from the owner, who was interviewed for them. Do not
 - `skills/code-standards/SKILL.md` holds the frontmatter (what triggers the skill) and the language-agnostic rules: comments, error handling, defensive code, abstraction, naming, folder layout, testing, blank lines, formatting, git.
 - `skills/code-standards/references/` holds stack-specific rules that `SKILL.md` tells the agent to read only for that stack, so other work does not pay for them. `typescript.md` covers TypeScript, React, Next.js, and Node. `tailwind.md` covers Tailwind classes. Add another language or tool as a new file here plus a pointer line in `SKILL.md`.
 - `skills/code-standards/evals/evals.json` holds the test prompts used to check the skill.
-- `.claude-plugin/marketplace.json` lists the skill as a Claude Code plugin. Its `skills` path must point at the skill folder.
+- `skills/micro-interactions/SKILL.md` holds the UI micro-interaction rules: password reveal, confirm dialogs, pending and feedback states, overlays, and motion. `skills/micro-interactions/evals/evals.json` holds its test prompts. Do not copy those rules into `code-standards`.
+- `.claude-plugin/marketplace.json` lists the skills as a Claude Code plugin. Each `skills` entry must point at a skill folder.
 
 The skill lives under `skills/` because that is where the `skills` CLI (`npx skills add`) looks for it. Keep it there.
 
@@ -32,8 +33,10 @@ Users install with `npx skills add luxuling/agent-skill-dev` or through the Clau
 ```sh
 ln -s "$PWD/skills/code-standards" ~/.claude/skills/code-standards   # Claude Code
 ln -s "$PWD/skills/code-standards" ~/.agents/skills/code-standards   # Codex, Gemini CLI, others
+ln -s "$PWD/skills/micro-interactions" ~/.claude/skills/micro-interactions
+ln -s "$PWD/skills/micro-interactions" ~/.agents/skills/micro-interactions
 ```
 
 ## Testing a change
 
-Use the `skill-creator` skill. It runs each prompt in `skills/code-standards/evals/evals.json` twice, once with the skill and once without, and opens a viewer to compare the outputs. Results go in `skills/code-standards-workspace/iteration-N/`, a sibling of the skill folder that is not part of the skill. It is listed in `.gitignore` so it is never published.
+Use the `skill-creator` skill. It runs each prompt in `skills/code-standards/evals/evals.json` twice, once with the skill and once without, and opens a viewer to compare the outputs. Results go in `skills/code-standards-workspace/iteration-N/`, a sibling of the skill folder that is not part of the skill. It is listed in `.gitignore` so it is never published. The same loop applies to `skills/micro-interactions/evals/evals.json`, with output in `skills/micro-interactions-workspace/`.
