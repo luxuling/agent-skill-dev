@@ -1,4 +1,10 @@
+<div align="center">
+
 # code-standards
+
+**Make AI coding agents write code your way.**
+
+Clean, readable, consistent. No manual cleanup afterwards.
 
 ![Agent Skills](https://img.shields.io/badge/Agent_Skills-spec-black)
 ![Claude Code](https://img.shields.io/badge/Claude_Code-ready-d97757)
@@ -6,45 +12,55 @@
 ![Gemini CLI](https://img.shields.io/badge/Gemini_CLI-ready-4285f4)
 ![License: MIT](https://img.shields.io/badge/license-MIT-blue)
 
-An [Agent Skill](https://agentskills.io/specification) that makes AI coding agents write code the owner's way: clean, readable, and consistent, with no manual cleanup afterwards.
+```sh
+npx skills add luxuling/agent-skill-dev -g
+```
 
-One folder works in Claude Code, Codex, Gemini CLI, Cursor, and any other agent that supports the Agent Skills spec.
+[Install](#-install) · [Update](#-update) · [Usage](#-usage) · [Customize](#-customize)
 
-## What it enforces
+</div>
 
-| Area | Rule |
-| --- | --- |
-| Comments | None by default. Only `TODO`, `FIX`, `HACK`, `WARN`, `PERF`, `NOTE`, `TEST` markers |
-| Errors | Throw, and catch only at the boundary |
-| Defensive code | No needless null checks, fallback defaults, or optional chaining |
-| Abstraction | One job per function, shared on the second use, components only render |
-| Readability | Blank lines between logical steps, never one dense block |
-| Naming | kebab-case files, folders by layer (`components/`, `hooks/`, `services/`) |
-| Testing | Every feature and fix ships with tests in `tests/` |
-| Git | Conventional Commits, `type/short-desc` branches, no commit unless asked |
-| TypeScript | Arrow functions, named exports, no `any` / `as` / `!`, Zod at the edges |
-| Go | Wrapped errors handled at the boundary, consumer-side interfaces, table-driven tests beside the code, chi + validator + pgx/sqlc |
-| Tailwind | Canonical classes only, checked and fixed with `tailwindcss canonicalize` |
-| Micro-interactions | Password reveal, confirm on hard-to-undo actions, pending buttons, visible outcomes, loading/empty/error. Rules live in `skills/micro-interactions/` |
+---
 
-## Install
+## ✨ What it enforces
 
-### Any agent
+| | Area | Rule |
+| --- | --- | --- |
+| 💬 | Comments | None by default. Only `TODO`, `FIX`, `HACK`, `WARN`, `PERF`, `NOTE`, `TEST` markers |
+| 🧯 | Errors | Throw, and catch only at the boundary |
+| 🛡️ | Defensive code | No needless null checks, fallback defaults, or optional chaining |
+| 🧩 | Abstraction | One job per function, shared on the second use, components only render |
+| 📖 | Readability | Blank lines between logical steps, never one dense block |
+| 🏷️ | Naming | kebab-case files, folders by layer (`components/`, `hooks/`, `services/`) |
+| 🧪 | Testing | Every feature and fix ships with tests in `tests/` |
+| 🌿 | Git | Conventional Commits, `type/short-desc` branches, no commit unless asked |
+| 🟦 | TypeScript | Arrow functions, named exports, no `any` / `as` / `!`, Zod at the edges |
+| 🐹 | Go | Wrapped errors handled at the boundary, consumer-side interfaces, table-driven tests beside the code, chi + validator + pgx/sqlc |
+| 🎨 | Tailwind | Canonical classes only, checked and fixed with `tailwindcss canonicalize` |
+| ✋ | Micro-interactions | Password reveal, confirm on hard-to-undo actions, pending buttons, visible outcomes, loading/empty/error |
+
+One folder works in Claude Code, Codex, Gemini CLI, Cursor, and any other agent that supports the [Agent Skills spec](https://agentskills.io/specification).
+
+## 📦 Install
 
 ```sh
 npx skills add luxuling/agent-skill-dev -g
 ```
 
-Uses the [skills](https://skills.sh) CLI and works with Claude Code, Codex, Gemini CLI, Cursor, and more. Drop `-g` to install into the current project only.
+Uses the [skills](https://skills.sh) CLI. Drop `-g` to install into the current project only.
 
-### Claude Code plugin
+<details>
+<summary><b>Claude Code plugin</b></summary>
 
 ```text
 /plugin marketplace add luxuling/agent-skill-dev
 /plugin install lixu@code-standards
 ```
 
-### Manual
+</details>
+
+<details>
+<summary><b>Manual (git clone + symlink)</b></summary>
 
 ```sh
 git clone https://github.com/luxuling/agent-skill-dev.git
@@ -54,23 +70,37 @@ ln -s "$PWD/agent-skill-dev/skills/micro-interactions" ~/.claude/skills/micro-in
 
 Use `~/.agents/skills/` instead of `~/.claude/skills/` for Codex, Gemini CLI, and other agents.
 
-## Usage
+</details>
+
+## 🔄 Update
+
+| Installed with | Run |
+| --- | --- |
+| skills CLI | `npx skills update -g` (`npx skills check -g` to see what changed, drop `-g` for a project install) |
+| Claude Code plugin | `/plugin marketplace update code-standards` then `/plugin update lixu@code-standards`, or enable auto-update in `/plugin` → Marketplaces |
+| Manual | `git pull` in the clone. The symlink picks it up right away |
+
+## 🚀 Usage
 
 Nothing to call. The agent loads the skill on its own whenever it writes, edits, reviews, or tests code, names a branch, or writes a commit message.
 
 ```text
 > add a users page that fetches /api/users and shows a table
 > fix the invoice total rounding bug
-> write the commit message for this change
 > add a login form with email and password
-> add delete on each row of the users table
 ```
 
-UI work also loads `micro-interactions`, which ships the password eye, confirm dialogs, pending buttons, and the other feedback in that skill.
+To check it is active, ask `what skills do you have?` and look for `lixu:code-standards` and `lixu:micro-interactions` (plugin) or `code-standards` and `micro-interactions` (other installs).
 
-To check it is active in Claude Code, ask `what skills do you have?` and look for `lixu:code-standards` and `lixu:micro-interactions` (plugin install) or `code-standards` and `micro-interactions` (other installs).
+## 🔧 Customize
 
-## Structure
+- **Change a rule:** edit `SKILL.md` or the matching file in `references/`.
+- **Add a language:** create `references/<language>.md` and add one pointer line in `SKILL.md`.
+- **Keep the spec limits:** `name` matches the folder name, `description` stays under 1024 characters, `SKILL.md` stays under 500 lines.
+- **Test a change:** run the `skill-creator` skill. It runs each prompt in `evals/evals.json` with and without the skill and opens a viewer to compare. Output goes to `skills/code-standards-workspace/`, which is git-ignored.
+
+<details>
+<summary><b>📁 Structure</b></summary>
 
 ```text
 .claude-plugin/
@@ -89,17 +119,9 @@ skills/micro-interactions/
     └── evals.json                # test prompts
 ```
 
-The agent reads a file under `references/` only when the task uses that stack, so other work does not pay for it.
+Files under `references/` load only when the task uses that stack.
 
-## Customize
-
-- **Change a rule:** edit `SKILL.md` or the matching file in `references/`.
-- **Add a language:** create `references/<language>.md` and add one pointer line in `SKILL.md`.
-- **Keep the spec limits:** `name` matches the folder name, `description` stays under 1024 characters, and `SKILL.md` stays under 500 lines.
-
-## Test a change
-
-Use the `skill-creator` skill. It runs each prompt in `evals/evals.json` with and without the skill and opens a viewer to compare the results. Output goes to `skills/code-standards-workspace/`, which is git-ignored.
+</details>
 
 ## License
 
