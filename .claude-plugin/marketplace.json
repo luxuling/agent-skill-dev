@@ -15,7 +15,8 @@
       "strict": false,
       "skills": [
         "./skills/code-standards",
-        "./skills/micro-interactions"
+        "./skills/micro-interactions",
+        "./skills/ci-cd"
       ]
     }
   ]
