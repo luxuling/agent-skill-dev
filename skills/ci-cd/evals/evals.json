@@ -1,0 +1,23 @@
+{
+  "skill_name": "ci-cd",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "next.js 15 app with prisma + postgres. set up ci and deployment to my vps for app.example.com.",
+      "expected_output": "Adds ci.yml on ubuntu-latest for PRs and main, and deploy.yml triggered by v* tags plus workflow_dispatch with a tag input. Image is built on ubuntu-latest and pushed to GHCR tagged with the git tag, never latest. Deploy job runs on the self-hosted vps runner, writes /apps/<app>/compose.yml and .env from the ENV_FILE secret, runs prisma migrations through a migrate compose service before starting the app, checks GET /health on 127.0.0.1:HOST_PORT, and rolls back to the previous compose.yml and .env on failure. Dockerfile uses output standalone. compose.yml binds the app to 127.0.0.1 and runs postgres with a named volume and no published port. Adds a /health route, a host nginx server block proxying to HOST_PORT, and Certbot setup steps. No PM2, systemd unit, or SSH deploy.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "vite react spa, no backend. how do i get this live on my server with https?",
+      "expected_output": "SPA ships in its own nginx:alpine container, not as files copied to the host. Includes deploy/spa-nginx.conf with try_files fallback to index.html and a /health location. Same tag-triggered GHCR + self-hosted runner deploy as other stacks, with no migrate or db service. Host nginx proxies the domain to 127.0.0.1:HOST_PORT and certbot --nginx adds HTTPS. VITE_* variables are passed as build args, not runtime env.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "go api using chi and postgres. add a github action that deploys it on every push to main.",
+      "expected_output": "Follows the standard over the literal request or flags the conflict: deploys on v* tags, not on push to main, while main pushes run CI only. Multi-stage Go Dockerfile with CGO_ENABLED=0 and a distroless final image. Migrations run as a migrate compose service before up. Health check on /health with automatic rollback. Deploy job runs on the self-hosted vps runner and pulls the image from GHCR.",
+      "files": []
+    }
+  ]
+}

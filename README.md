@@ -38,6 +38,7 @@ npx skills add luxuling/agent-skill-dev -g
 | 🐹 | Go | Wrapped errors handled at the boundary, consumer-side interfaces, table-driven tests beside the code, chi + validator + pgx/sqlc |
 | 🎨 | Tailwind | Canonical classes only, checked and fixed with `tailwindcss canonicalize` |
 | ✋ | Micro-interactions | Password reveal, confirm on hard-to-undo actions, pending buttons, visible outcomes, loading/empty/error |
+| 🚀 | CI/CD | Tag deploys to a VPS: GHCR image, self-hosted runner, Docker Compose, host nginx + Certbot, health check with auto rollback |
 
 One folder works in Claude Code, Codex, Gemini CLI, Cursor, and any other agent that supports the [Agent Skills spec](https://agentskills.io/specification).
 
@@ -66,6 +67,7 @@ Uses the [skills](https://skills.sh) CLI. Drop `-g` to install into the current 
 git clone https://github.com/luxuling/agent-skill-dev.git
 ln -s "$PWD/agent-skill-dev/skills/code-standards" ~/.claude/skills/code-standards
 ln -s "$PWD/agent-skill-dev/skills/micro-interactions" ~/.claude/skills/micro-interactions
+ln -s "$PWD/agent-skill-dev/skills/ci-cd" ~/.claude/skills/ci-cd
 ```
 
 Use `~/.agents/skills/` instead of `~/.claude/skills/` for Codex, Gemini CLI, and other agents.
@@ -90,7 +92,7 @@ Nothing to call. The agent loads the skill on its own whenever it writes, edits,
 > add a login form with email and password
 ```
 
-To check it is active, ask `what skills do you have?` and look for `lixu:code-standards` and `lixu:micro-interactions` (plugin) or `code-standards` and `micro-interactions` (other installs).
+To check it is active, ask `what skills do you have?` and look for `lixu:code-standards`, `lixu:micro-interactions`, and `lixu:ci-cd` (plugin) or `code-standards`, `micro-interactions`, and `ci-cd` (other installs).
 
 ## 🔧 Customize
 
@@ -115,6 +117,10 @@ skills/code-standards/
     └── evals.json                # test prompts
 skills/micro-interactions/
 ├── SKILL.md                      # password reveal, confirms, feedback
+└── evals/
+    └── evals.json                # test prompts
+skills/ci-cd/
+├── SKILL.md                      # GitHub Actions, Docker, nginx, VPS deploy
 └── evals/
     └── evals.json                # test prompts
 ```
