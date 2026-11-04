@@ -39,6 +39,9 @@ npx skills add luxuling/agent-skill-dev -g
 | 🎨 | Tailwind | Canonical classes only, checked and fixed with `tailwindcss canonicalize` |
 | ✋ | Micro-interactions | Password reveal, confirm on hard-to-undo actions, pending buttons, visible outcomes, loading/empty/error |
 | 🚀 | CI/CD | Tag deploys to a VPS: GHCR image, self-hosted runner, Docker Compose, host nginx + Certbot, health check with auto rollback |
+| 📝 | Commit | `/commit` inspects the diff and commits with a Conventional Commit. Does not push |
+| 🔀 | Pull request | `/pr` pushes the current branch and opens a PR. Does not merge |
+| 🏷️ | Release | `/release` picks the next tag from the commits and pushes it with a short release description |
 
 One folder works in Claude Code, Codex, Gemini CLI, Cursor, and any other agent that supports the [Agent Skills spec](https://agentskills.io/specification).
 
@@ -68,6 +71,9 @@ git clone https://github.com/luxuling/agent-skill-dev.git
 ln -s "$PWD/agent-skill-dev/skills/code-standards" ~/.claude/skills/code-standards
 ln -s "$PWD/agent-skill-dev/skills/micro-interactions" ~/.claude/skills/micro-interactions
 ln -s "$PWD/agent-skill-dev/skills/ci-cd" ~/.claude/skills/ci-cd
+ln -s "$PWD/agent-skill-dev/skills/commit" ~/.claude/skills/commit
+ln -s "$PWD/agent-skill-dev/skills/pr" ~/.claude/skills/pr
+ln -s "$PWD/agent-skill-dev/skills/release" ~/.claude/skills/release
 ```
 
 Use `~/.agents/skills/` instead of `~/.claude/skills/` for Codex, Gemini CLI, and other agents.
@@ -92,7 +98,17 @@ Nothing to call. The agent loads the skill on its own whenever it writes, edits,
 > add a login form with email and password
 ```
 
-To check it is active, ask `what skills do you have?` and look for `lixu:code-standards`, `lixu:micro-interactions`, and `lixu:ci-cd` (plugin) or `code-standards`, `micro-interactions`, and `ci-cd` (other installs).
+Three commands run when you ask:
+
+```text
+> /commit
+> /pr
+> /release
+```
+
+`/commit` does not push. `/pr` pushes the current branch and opens the pull request. `/release` picks the next `v*` tag from the commits, pushes only that tag, and writes a short release description. That tag push is what starts the deploy.
+
+To check it is active, ask `what skills do you have?` and look for `lixu:code-standards`, `lixu:micro-interactions`, `lixu:ci-cd`, `lixu:commit`, `lixu:pr`, and `lixu:release` (plugin) or the same names without the `lixu:` prefix (other installs).
 
 ## 🔧 Customize
 
@@ -121,6 +137,18 @@ skills/micro-interactions/
     └── evals.json                # test prompts
 skills/ci-cd/
 ├── SKILL.md                      # GitHub Actions, Docker, nginx, VPS deploy
+└── evals/
+    └── evals.json                # test prompts
+skills/commit/
+├── SKILL.md                      # /commit
+└── evals/
+    └── evals.json                # test prompts
+skills/pr/
+├── SKILL.md                      # /pr
+└── evals/
+    └── evals.json                # test prompts
+skills/release/
+├── SKILL.md                      # /release
 └── evals/
     └── evals.json                # test prompts
 ```

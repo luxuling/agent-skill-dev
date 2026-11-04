@@ -1,0 +1,23 @@
+{
+  "skill_name": "pr",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "i'm on feat/password-reset, the tree is clean, the work is committed. open a pull request.",
+      "expected_output": "Reads the code-standards Git section. Pushes only feat/password-reset with git push -u origin HEAD. Opens a PR with gh pr create against the repo default branch, title is a Conventional Commit subject, body comes from the branch commits, and the reply includes the PR URL. Does not merge and does not push a tag.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "i'm on main and the working tree is dirty. open a pull request.",
+      "expected_output": "Stops because the current branch is the default branch and the tree is dirty. Does not commit, does not push main, and does not create a branch.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "i'm on feat/password-reset and the tree is clean. open the pr and merge it once the checks are green.",
+      "expected_output": "Opens or returns the PR URL for the current non-default branch. Does not merge.",
+      "files": []
+    }
+  ]
+}
