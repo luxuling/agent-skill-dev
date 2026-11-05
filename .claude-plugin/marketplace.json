@@ -10,13 +10,16 @@
   "plugins": [
     {
       "name": "lixu",
-      "description": "Makes AI coding agents write clean, readable code: no comment noise, throw-and-catch-at-boundary errors, one job per function, canonical Tailwind classes, tests, and Conventional Commits",
+      "description": "Makes AI coding agents write clean, readable code: no comment noise, throw-and-catch-at-boundary errors, one job per function, canonical Tailwind classes, tests, and Conventional Commits. Also runs /commit, /pr, and /release",
       "source": "./",
       "strict": false,
       "skills": [
         "./skills/code-standards",
         "./skills/micro-interactions",
-        "./skills/ci-cd"
+        "./skills/ci-cd",
+        "./skills/commit",
+        "./skills/pr",
+        "./skills/release"
       ]
     }
   ]

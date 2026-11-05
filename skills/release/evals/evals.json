@@ -1,0 +1,23 @@
+{
+  "skill_name": "release",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "we're on main, the tree is clean, and the latest tag is v1.4.2. since then the commits are 'feat(auth): add password reset' and 'fix(billing): round invoice totals to 2 decimals'. /release",
+      "expected_output": "Reads the ci-cd skill. Chooses v1.5.0 because a feature commit is the highest bump. Writes a short GitHub release description with plain bullets and no conventional-commit prefixes, such as 'Add password reset' and 'Round invoice totals to 2 decimals'. Creates a lightweight tag with git tag v1.5.0, pushes only that tag with git push origin v1.5.0, and publishes those notes with gh release create. Says the tag push starts the deploy workflow. Does not use --generate-notes, does not push the branch, does not run git push --tags, and does not tag latest.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "we're on main, the tree is clean, and HEAD is already tagged v1.4.2. /release",
+      "expected_output": "Sees no commits since v1.4.2 and stops. Does not create a tag, does not push, and does not open a GitHub release.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "i'm on feat/password-reset and I still have uncommitted edits. release, or just tag latest if that's easier.",
+      "expected_output": "Stops because the tree is dirty and HEAD is not the default branch. Does not choose a version, does not create a tag, does not push, and does not tag latest.",
+      "files": []
+    }
+  ]
+}

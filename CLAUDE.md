@@ -15,6 +15,9 @@ The rules in the skill come from the owner, who was interviewed for them. Do not
 - `skills/code-standards/evals/evals.json` holds the test prompts used to check the skill.
 - `skills/micro-interactions/SKILL.md` holds the UI micro-interaction rules: password reveal, confirm dialogs, pending and feedback states, overlays, and motion. `skills/micro-interactions/evals/evals.json` holds its test prompts. Do not copy those rules into `code-standards`.
 - `skills/ci-cd/SKILL.md` holds the CI/CD and VPS deploy standard: GitHub Actions CI, tag-triggered deploy through a self-hosted runner on the VPS, GHCR images, Docker Compose in `/apps/<app>`, migrations, health check with auto rollback, host nginx, Certbot, and first-time server setup. `skills/ci-cd/evals/evals.json` holds its test prompts.
+- `skills/commit/SKILL.md` is the `/commit` command. It commits the current change and does not push. The message format stays in the Git section of `skills/code-standards/SKILL.md`. `skills/commit/evals/evals.json` holds its test prompts.
+- `skills/pr/SKILL.md` is the `/pr` command. It pushes the current branch and opens a pull request. It does not merge. `skills/pr/evals/evals.json` holds its test prompts.
+- `skills/release/SKILL.md` is the `/release` command. It chooses the next `v*` tag from the commits since the last tag, writes a short release description, and pushes only that tag, which is the deploy `skills/ci-cd/SKILL.md` already describes. `skills/release/evals/evals.json` holds its test prompts.
 - `.claude-plugin/marketplace.json` lists the skills as a Claude Code plugin. Each `skills` entry must point at a skill folder.
 
 The skill lives under `skills/` because that is where the `skills` CLI (`npx skills add`) looks for it. Keep it there.
@@ -38,8 +41,14 @@ ln -s "$PWD/skills/micro-interactions" ~/.claude/skills/micro-interactions
 ln -s "$PWD/skills/micro-interactions" ~/.agents/skills/micro-interactions
 ln -s "$PWD/skills/ci-cd" ~/.claude/skills/ci-cd
 ln -s "$PWD/skills/ci-cd" ~/.agents/skills/ci-cd
+ln -s "$PWD/skills/commit" ~/.claude/skills/commit
+ln -s "$PWD/skills/commit" ~/.agents/skills/commit
+ln -s "$PWD/skills/pr" ~/.claude/skills/pr
+ln -s "$PWD/skills/pr" ~/.agents/skills/pr
+ln -s "$PWD/skills/release" ~/.claude/skills/release
+ln -s "$PWD/skills/release" ~/.agents/skills/release
 ```
 
 ## Testing a change
 
-Use the `skill-creator` skill. It runs each prompt in `skills/code-standards/evals/evals.json` twice, once with the skill and once without, and opens a viewer to compare the outputs. Results go in `skills/code-standards-workspace/iteration-N/`, a sibling of the skill folder that is not part of the skill. It is listed in `.gitignore` so it is never published. The same loop applies to `skills/micro-interactions/evals/evals.json`, with output in `skills/micro-interactions-workspace/`, and to `skills/ci-cd/evals/evals.json`, with output in `skills/ci-cd-workspace/`.
+Use the `skill-creator` skill. It runs each prompt in `skills/code-standards/evals/evals.json` twice, once with the skill and once without, and opens a viewer to compare the outputs. Results go in `skills/code-standards-workspace/iteration-N/`, a sibling of the skill folder that is not part of the skill. It is listed in `.gitignore` so it is never published. The same loop applies to `skills/micro-interactions/evals/evals.json`, with output in `skills/micro-interactions-workspace/`, to `skills/ci-cd/evals/evals.json`, with output in `skills/ci-cd-workspace/`, and to `skills/commit/evals/evals.json`, `skills/pr/evals/evals.json`, and `skills/release/evals/evals.json`, with output in `skills/commit-workspace/`, `skills/pr-workspace/`, and `skills/release-workspace/`.
